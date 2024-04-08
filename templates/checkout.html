@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    Checkout
+{% endblock %}
+
+{% block title %}
+    Checkout - CHOCOBLISS Company PVT LTD
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="my-4">Checkout</h2>
+                <form id="checkoutForm" method="POST" action="{% url 'checkout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Place Order</button>
+                </form>
+                <p id="orderPlacedMessage" style="display: none;">Your order has been placed.</p>
+                <a href="{% url 'shope:allProdCat' %}" class="btn btn-secondary mt-3">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            document.getElementById('orderPlacedMessage').style.display = 'block'; // Show the order placed message
+        });
+    </script>
+{% endblock %}
